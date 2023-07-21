@@ -1,0 +1,25 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const addForm = document.getElementById('addForm');
+  const itemList = document.getElementById('items');
+
+  addForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const newItem = document.getElementById('item').value;
+    if (newItem.trim() !== '') {
+      const newItemElement = document.createElement('li');
+      newItemElement.className = 'list-group-item';
+      newItemElement.textContent = newItem;
+
+      const deleteButton = document.createElement('button');
+      deleteButton.className = 'btn btn-danger btn-sm float-right delete';
+      deleteButton.textContent = 'X';
+      deleteButton.addEventListener('click', function () {
+        itemList.removeChild(newItemElement);
+      });
+
+      newItemElement.appendChild(deleteButton);
+      itemList.appendChild(newItemElement);
+      document.getElementById('item').value = '';
+    }
+  });
+});
